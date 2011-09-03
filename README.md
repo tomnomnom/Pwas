@@ -6,9 +6,9 @@ that would be a very bad idea.
 
 Requirements
 ------------
-PHP 5.3.\* 
-  pcntl
-  sockets
+* PHP 5.3.\* 
+  * pcntl
+  * sockets
 
 Examples
 --------
