@@ -92,8 +92,6 @@ class Server extends \Pwas\Tcp\Server {
     list($method, $path) = explode(' ', $request);
     list($this->server_vars['path']) = explode('?', $path, 2);
 
-    $this->debug("Request: {$path}");
-    
     //Parse any get variables
     $path_parts = parse_url($path);
     if (isSet($path_parts['query'])){
