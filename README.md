@@ -13,11 +13,12 @@ Requirements
 Examples
 --------
 You can run Examples/Hello.php like so:
-   php Examples/Hello.php
+
+    php Examples/Hello.php
 
 Notes
 -----
-This whole thing is in a state of flux; I'm refacoring and changing things like made.
+This whole thing is in a state of flux; I'm refacoring and changing things like mad.
 
 
 
