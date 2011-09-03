@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+   "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+  <head>
+    <title>Links</title>
+    <link rel="stylesheet" type="text/css" href="/css/reset.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/main.css"> 
+                 
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <h1>Links</h1>
+    <form method="post" action="/add" name="newLink">
+      <label for="title">Title</label>
+      <input type="text" name="title" id="title"/>
+
+      <label for="url">URL</label>
+      <input type="text" name="url" id="url"/>
+
+      <input type="submit" id="addLink" value="Add link"/> 
+    </form>
+    <div id="links"></div>
+
+    <script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript">
+    <!--
+      var deleteLink = function(element){
+        if (confirm('Delete this link?')){ 
+          var selectedUrl = $(element).attr('data-url');
+          $.post('/delete', {
+            url: selectedUrl
+          }, function(data){
+            $(element).parent('li').hide(200);
+          });
+        }
+      };
+
+      var getLinkHtml = function(link){
+        var linkHtml = '<li>';
+        linkHtml += '<a href="'+link.url+'">' + link.title + '</a> ';
+        linkHtml += '<input type="button" onclick="deleteLink(this);" value="Delete" data-url="'+link.url+'"/> '
+        linkHtml += '<span class="date">'+link.dateString+'</span> ';
+        linkHtml += '</li>';
+        return linkHtml;
+      };
+
+      var updateLinks = function(){
+        $.getJSON('/getall', function(data){
+          links = $('#links');
+          links.html('');
+          var linksHtml = '<ul>';
+
+          $(data).each(function(key, link){
+            linksHtml += getLinkHtml(link);
+          });
+          linksHtml += '</ul>';
+
+          links.append(linksHtml);
+        });
+      };
+
+      $(document).ready(function(){
+        document.newLink.onsubmit = function(){
+          var link = {
+            url:   $('#url').attr('value'),
+            title: $('#title').attr('value'),
+          };
+          $.post('/add', link, function(data){
+            if (data.error){
+              alert(data.errorString);
+              return false;
+            }
+            $('#url').attr('value', '');
+            $('#title').attr('value', '');
+            
+            $('div#links > ul').prepend(getLinkHtml(data));
+          }, 'json');
+          return false;
+        };
+
+        //Update the links on page load
+        updateLinks();
+      }); 
+    -->
+    </script>
+  </body>
+</html>
