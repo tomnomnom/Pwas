@@ -18,7 +18,7 @@ You can run Examples/Hello.php like so:
 
 Notes
 -----
-This whole thing is in a state of flux; I'm refacoring and changing things like mad.
+This whole thing is in a state of flux; I'm refactoring and changing things like mad.
 
 
 
