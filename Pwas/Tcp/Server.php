@@ -1,6 +1,6 @@
 <?php
-namespace Core;
-class TcpServer {
+namespace Pwas\Tcp;
+class Server {
 	protected $host;
 	protected $port;
 	protected $socket;

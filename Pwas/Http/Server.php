@@ -1,6 +1,6 @@
 <?php
-namespace Core;
-class HttpServer extends TcpServer {
+namespace Pwas\Http;
+class Server extends \Pwas\Tcp\Server {
 	protected $headers_sent = false;	
 	protected $get_vars = array();
 	protected $post_vars = array();
