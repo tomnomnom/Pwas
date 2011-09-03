@@ -74,7 +74,7 @@ class Server extends \Pwas\Tcp\Server {
     return $this->server_vars;
   }
 
-  public function cookieVar($name){
+  public function cookieVar($key){
     return isSet($this->cookie_vars[$key])? $this->cookie_vars[$key] : null;
   }
   public function cookieVars(){
