@@ -1,21 +1,11 @@
 <?php
-function __autoload($class){
+spl_autoload_register(function($class){
 	$class = ltrim($class, '\\');
 	$class = str_replace('\\', '/', $class);
-	require("./{$class}.class.php");
-}
+	require __DIR__."/../{$class}.php";
+});
 
-$settings = parse_ini_file('./Settings.ini', true);
+$settings = parse_ini_file(__DIR__.'/../Settings.ini', true);
 
-//Database settings
-\Core\PdoFactory::setConfig(array(
-	'driver' 	 => $settings['database']['driver'],
-	'filename' => $settings['database']['filename']
-));
-
-//Locale settings
 date_default_timezone_set($settings['locale']['timezone']);
 
-//Server settings
-define('SERVER_IP', $settings['server']['ip']);
-define('SERVER_PORT', $settings['server']['port']);
