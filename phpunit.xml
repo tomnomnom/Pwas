@@ -1,0 +1,7 @@
+<phpunit bootstrap="Pwas/Init.php">
+  <testsuites>
+    <testsuite name="Pwas">
+      <directory>Test</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>

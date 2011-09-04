@@ -24,6 +24,9 @@ class Request {
     //Parse any post data
     if ($method === 'POST'){
       $this->postVars = $this->parseVariableString(array_pop($headers));
+
+      //Remove trailing whitespace from between headers and post data
+      array_pop($headers);
     }
 
     //Store the remaining headers in the serverVars
