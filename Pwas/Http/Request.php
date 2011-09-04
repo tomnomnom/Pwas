@@ -37,7 +37,7 @@ class Request {
       $this->serverVars[$key] = $value;
 
       if (strToLower($key) === 'cookie'){
-        $this->cookieVars = $this->parseVariableString($value);
+        $this->cookieVars = $this->parseCookieString($value);
       }
     }
   }
@@ -47,6 +47,15 @@ class Request {
     $data = array();
     parse_str($variableString, $data);
     return $data;
+  }
+
+  protected function parseCookieString($cookieString){
+    $cookies = array();
+    foreach (explode(';', $cookieString) as $cookie){
+      list($key, $value) = explode('=', $cookie, 2);
+      $cookies[trim($key)] = urldecode(trim($value));
+    }
+    return $cookies;
   }
 
   public function getVar($key){
