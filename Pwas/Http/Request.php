@@ -6,39 +6,54 @@ class Request {
   protected $postVars   = array();
   protected $serverVars = array();
   protected $cookieVars = array();
+
+  protected $method = '';
   
   public function parseHeaders($headers) {
     $headers = explode("\n", trim($headers));
 
     //The request is always the first thing, thankfully
     $request = array_shift($headers);
-    list($method, $path) = explode(' ', $request);
+    list($this->method, $path) = explode(' ', $request);
     list($this->serverVars['path']) = explode('?', $path, 2);
 
     //Parse any get variables
-    $path_parts = parse_url($path);
-    if (isSet($path_parts['query'])){
-      $this->getVars = $this->parseVariableString($path_parts['query']);
-    }
-
-    //Parse any post data
-    if ($method === 'POST'){
-      $this->postVars = $this->parseVariableString(array_pop($headers));
-
-      //Remove trailing whitespace from between headers and post data
-      array_pop($headers);
+    $pathParts = parse_url($path);
+    if (isSet($pathParts['query'])){
+      $this->getVars = $this->parseVariableString($pathParts['query']);
     }
 
     //Store the remaining headers in the serverVars
+    $hitLastHeader = false;
     foreach ($headers as $header){
-      $header = explode(':', trim($header));
+      $header = trim($header);
+      if ($header === '') {
+        // whitespace seperating headers and postdata
+        $hitLastHeader = true;
+        continue;
+      }
+      if ($hitLastHeader){
+        // assume postdata
+        $this->postVars = $this->parseVariableString($header);
+        break;
+      }
+
+      $header = explode(':', $header, 2);
+      if (sizeOf($header) !== 2){
+        // cannot handle non k/v pairs
+        continue;
+      } 
+
       $key = trim($header[0]);
       $value = trim($header[1]);
-      $this->serverVars[$key] = $value;
 
       if (strToLower($key) === 'cookie'){
         $this->cookieVars = $this->parseCookieString($value);
+        continue;
       }
+
+      // treat anything remaining as a server var
+      $this->serverVars[$key] = $value;
     }
   }
 
@@ -84,5 +99,9 @@ class Request {
   }
   public function cookieVars(){
     return $this->cookieVars;
+  }
+
+  public function getMethod(){
+    return $this->method;
   }
 }
