@@ -17,6 +17,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
       )
     ));
     $this->assertEquals($request->getMethod(), 'GET');
+    $this->assertEquals($request->getPath(), '/somefile');
 
     // on POST
     $request->parseHeaders("POST /somefile?foo=bar&arr[]=one&arr[]=two HTTP/1.0");
@@ -30,6 +31,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
       )
     ));
     $this->assertEquals($request->getMethod(), 'POST');
+    $this->assertEquals($request->getPath(), '/somefile');
   }
 
   public function testPostVars(){
@@ -43,6 +45,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
       'bin' => 'beb'
     ));
     $this->assertEquals($request->getMethod(), 'POST');
+    $this->assertEquals($request->getPath(), '/');
   }
 
   public function testCookieVars(){
@@ -58,6 +61,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
       'bin' => 'beb'
     ));
     $this->assertEquals($request->getMethod(), 'GET');
+    $this->assertEquals($request->getPath(), '/');
 
     // POST
     $request->parseHeaders("POST / HTTP/1.0\r\nCookie: bar=foo; beb=bin");
@@ -69,5 +73,6 @@ class RequestTest extends \PHPUnit_Framework_TestCase {
       'beb' => 'bin'
     ));
     $this->assertEquals($request->getMethod(), 'POST');
+    $this->assertEquals($request->getPath(), '/');
   }
 }
