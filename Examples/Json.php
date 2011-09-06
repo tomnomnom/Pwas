@@ -25,7 +25,7 @@ $database = array(
 $app = new \Pwas\Http\Server('127.0.0.1', 9090);
 
 $app->accept(function($request, $response) use($database){
-  // We're serving JSON, so it makes sense to have an appropriate Conten-Type
+  // We're serving JSON, so it makes sense to have an appropriate Content-Type
   $response->setHeader('Content-Type', 'application/json');
   
   switch ($request->getPath()){

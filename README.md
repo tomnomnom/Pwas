@@ -1,28 +1,33 @@
-Pwas
-====
+# Pwas
 
-A small and naive web application server written in PHP. Do *not* use this in production; or on any public facing server - 
-that would be a very bad idea. I wrote this a couple of years ago to improve my understanding of HTTP and I've decided to 
-work on it some more for fun.
+A small and naive web application server written in PHP. Do *not* use this in production; or on 
+any public facing server - it is intended to be used for educational purposes only.
 
-Requirements
-------------
+
+## Requirements
 * PHP 5.3.\* 
   * pcntl
   * sockets
-* PHPUnit (if you want to run the tests)
+* PHPUnit (if you care to run the tests)
 
-Examples
---------
-You can run Examples/Hello.php like so:
+
+## Examples
+
+### Running
+You can run the examples like so:
 
     php Examples/Hello.php
 
-Notes
------
-This whole thing is in a state of flux; I'm refactoring and changing things like mad.
+### [Hello.php](https://github.com/TomNomNom/Pwas/blob/master/Examples/Hello.php)
+The most basic of examples.
 
-The server can only handle GET and POST requests at the moment. 
+### [Json.php](https://github.com/TomNomNom/Pwas/blob/master/Examples/Json.php)
+Examples of setting a header, and reacting to the requested path.
 
 
+## Tests
+Simply running "phpunit" in the root directory should be all you need to do.
+
+There is a very basic [compatibility test](https://github.com/TomNomNom/Pwas/blob/master/Test/CompatibilityTest.php) file. 
+Running it should give you a good idea of whether or not you will be able to run the server.
 
